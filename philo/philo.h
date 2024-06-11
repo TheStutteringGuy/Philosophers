@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 03:06:35 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/09 23:51:34 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/11 02:36:34 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data
 	long			philosopher_must_eat;
 	long			time_to_think;
 	long			*dead_notice;
+	long			*meal_notice;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*dead_mutex;
 }					t_data;
@@ -50,6 +51,7 @@ typedef struct s_philos
 	int				meals;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	statue_mutex;
 }					t_philos;
 
 // PROTOTYPES :
@@ -86,6 +88,7 @@ void				philo_sleep(t_philos *philo, long time);
 int					thread_check(t_philos *philo);
 void				lock(t_philos *philo);
 void				unlock(t_philos *philo);
+void				philo_think(t_philos *philo);
 void				monitor_lock(t_philos *philos, long j);
 void				monitor_unlock(t_philos *philos, long j);
 void				philo_printf_dead(char *str, t_philos *philo);

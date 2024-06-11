@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 03:07:15 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/06 17:28:43 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/11 02:02:01 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	init(int ac, char **av, t_data *data)
 		data->philosopher_must_eat = ft_atol(av[5]);
 	else
 		data->philosopher_must_eat = -1;
-	data->time_to_think = ft_atol(av[2]) - (ft_atol(av[3]) + ft_atol(av[4]));
 	data->dead_notice = malloc(sizeof(long));
 	*(data->dead_notice) = 0;
+	data->meal_notice = malloc(sizeof(long));
+	*(data->meal_notice) = 0;
 }
 
 int	main(int ac, char **av)

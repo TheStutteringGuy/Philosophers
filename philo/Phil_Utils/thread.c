@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 06:25:11 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/08 00:48:08 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/11 00:42:06 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_philos(t_data *data, t_philos *philos, pthread_mutex_t **forks)
 			else
 				philos[i].l_fork = forks[i - 1];
 		}
+		pthread_mutex_init(&philos[i].statue_mutex, NULL);
 		i++;
 	}
 }
