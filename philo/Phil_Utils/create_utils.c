@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 09:33:59 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/11 02:51:34 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:55:58 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	philo_sleep(t_philos *philo, long time)
 		return ;
 	}
 	pthread_mutex_unlock(philo->info->dead_mutex);
-	usleep(time);
+	my_usleep(time);
 }
 
 void	lock(t_philos *philo)

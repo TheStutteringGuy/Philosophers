@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 06:25:11 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/11 00:42:06 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/12 00:23:13 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	destroy_everything(t_philos *philos, pthread_mutex_t **forks)
 	pthread_mutex_destroy(philos->info->dead_mutex);
 	free(philos->info->dead_mutex);
 	free(philos->info->dead_notice);
+	free(philos->info->meal_notice);
 	free(philos);
 }
 

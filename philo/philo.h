@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 03:06:35 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/11 02:36:34 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:55:16 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ void				ft_stdout(char *str);
 int					pars_arg(int ac, char **av);
 long				ft_atol(const char *str);
 int					zero_five(int ac, char **av);
+
+// TIME :
+
 int					check_time(void);
-int					get_time(void);
+long				get_time(void);
 
 // Philo :
 
@@ -93,5 +96,7 @@ void				monitor_lock(t_philos *philos, long j);
 void				monitor_unlock(t_philos *philos, long j);
 void				philo_printf_dead(char *str, t_philos *philo);
 int					case_one_seat(t_philos *philo);
+long				get_time_ms(void);
+void				my_usleep(long time);
 
 #endif

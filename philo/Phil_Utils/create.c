@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 09:01:35 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/11 04:00:36 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/12 03:50:30 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*monitoring(void *arg)
 		while (i < philos[0].info->number_of_philosophers)
 		{
 			pthread_mutex_lock(&philos[i].statue_mutex);
-			if (get_time() - philos[i].last_eat > philos[0].info->time_to_die)
+			if (get_time() - philos[i].last_eat >= philos[0].info->time_to_die)
 			{
 				pthread_mutex_lock(philos[0].info->dead_mutex);
 				*(philos[0].info->dead_notice) = 1;
@@ -84,7 +84,7 @@ void	*routine(void *arg)
 	if (case_one_seat(philo) == 1)
 		return (NULL);
 	if (philo->seat % 2 == 0)
-		usleep(250);
+		my_usleep(1);
 	while (TRUE)
 	{
 		if (thread_check(philo) == 0)
@@ -95,10 +95,10 @@ void	*routine(void *arg)
 		philo->last_eat = get_time();
 		philo->meals += 1;
 		pthread_mutex_unlock(&philo->statue_mutex);
-		philo_sleep(philo, philo->info->time_to_eat * 1000);
+		philo_sleep(philo, philo->info->time_to_eat);
 		unlock(philo);
 		philo_printf("is sleeping", philo);
-		philo_sleep(philo, philo->info->time_to_sleep * 1000);
+		philo_sleep(philo, philo->info->time_to_sleep);
 		philo_printf("is thinking", philo);
 		philo_think(philo);
 	}
