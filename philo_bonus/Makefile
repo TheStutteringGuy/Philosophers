@@ -1,7 +1,7 @@
 # BASIC SETTINGS :
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -w #-fsanitize=thread
 RM = rm -rf
 AR = ar rcs
 

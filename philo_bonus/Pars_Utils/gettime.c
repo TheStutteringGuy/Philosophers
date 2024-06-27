@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 06:52:16 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/01 09:44:45 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/25 07:11:54 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ int	get_time(void)
 	gettimeofday(&tv, NULL);
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
+}
+
+void	my_usleep(long time)
+{
+	long	start;
+	long	end;
+
+	start = get_time();
+	while (TRUE)
+	{
+		end = get_time();
+		if ((end - start) >= time)
+			break ;
+		usleep(250);
+	}
 }
