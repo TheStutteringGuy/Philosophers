@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 23:05:58 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/12 02:12:23 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/26 22:59:00 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	philo_think(t_philos *philo)
 	{
 		if (philo->info->time_to_die > philo->info->time_to_eat
 			+ philo->info->time_to_sleep)
-			time = 2;
+			time = 1;
 	}
 	pthread_mutex_unlock(&philo->statue_mutex);
 	my_usleep(time);
