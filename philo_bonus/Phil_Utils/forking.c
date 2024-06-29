@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 23:50:16 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/27 06:20:35 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/29 17:51:02 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	*monitoring(void *arg)
 {
 	t_data	*data;
-	long	i;
 
 	data = arg;
-	i = 0;
 	while (TRUE)
 	{
 		sem_wait(data->dead_sem);
@@ -27,7 +25,9 @@ void	*monitoring(void *arg)
 			philo_dead("is dead", data);
 			*(data->dead_notice) = 1;
 			sem_post(data->dead_sem);
-			return (NULL);
+			sem_wait(data->print_sem);
+			clean_everything_process(data);
+			exit(1);
 		}
 		sem_post(data->dead_sem);
 		if (done_eating(data) == 0)
@@ -64,24 +64,20 @@ int	actual_routine(t_data *data)
 
 void	routine(t_data *data)
 {
-	pthread_t	monitor;
-
-	pthread_create(&monitor, NULL, monitoring, (void *)data);
+	pthread_create(&data->monitor, NULL, monitoring, (void *)data);
+	pthread_detach(data->monitor);
 	if (case_one(data) == 0)
 	{
-		pthread_join(monitor, NULL);
 		clean_everything_process(data);
 		exit(0);
 	}
 	if (actual_routine(data) == 1)
 	{
-		pthread_join(monitor, NULL);
 		clean_everything_process(data);
 		exit(1);
 	}
 	else
 	{
-		pthread_join(monitor, NULL);
 		clean_everything_process(data);
 		exit(-1);
 	}
@@ -118,24 +114,29 @@ int	fork_num_philo(t_data *data, long number_philo)
 
 int	forking(t_data *data)
 {
-	int	status;
+	long	i;
+	int		status;
 
 	if (initialize_sem(data) == 0)
 		return (0);
-	data->pids = malloc(sizeof(pid_t) * data->number_of_philosophers);
-	if (!data->pids)
-		return (clean_everything(data), 0);
 	if (fork_num_philo(data, data->number_of_philosophers) == 0)
 		return (free(data->pids), clean_everything(data), 0);
 	clean_everything(data);
 	while (TRUE)
 	{
-		if (waitpid(-1, &status, 0) == -1)
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 1)
 		{
-			if (errno == ECHILD)
-				break ;
+			i = 0;
+			while (i < data->number_of_philosophers)
+			{
+				kill(data->pids[i], SIGKILL);
+				++i;
+			}
+			break ;
 		}
+		if (errno == ECHILD)
+			break ;
 	}
-	printf("HELLOOOOOOOOOOOOOOOOOOOOO\n");
 	return (free(data->pids), 1);
 }

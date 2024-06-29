@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 06:10:24 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/27 05:00:53 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/28 11:37:38 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 int	check(t_data *data)
 {
-	sem_wait(data->dead_process);
-	sem_post(data->dead_process);
-	sem_wait(data->dead_sem);
-	if (*(data->dead_notice) == 1)
-	{
-		sem_post(data->dead_sem);
-		return (0);
-	}
-	sem_post(data->dead_sem);
 	sem_wait(data->meal_sem);
 	if (*(data->meal_notice) == 1)
 	{
@@ -35,8 +26,6 @@ int	check(t_data *data)
 
 void	wait_forks(t_data *data)
 {
-	sem_wait(data->dead_process);
-	sem_post(data->dead_process);
 	sem_wait(data->forks);
 	philo_print("has taken a fork", data);
 	sem_wait(data->forks);
@@ -51,9 +40,7 @@ void	post_forks(t_data *data)
 
 void	philo_print(char *str, t_data *data)
 {
-	sem_wait(data->dead_process);
-	sem_post(data->dead_process);
-	if (check(data) == 0 || check(data) == -1)
+	if (check(data) == -1)
 		return ;
 	sem_wait(data->print_sem);
 	printf("%ld %ld %s\n", (get_time() - data->start), data->seat, str);

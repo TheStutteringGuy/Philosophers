@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 06:17:11 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/27 06:17:36 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/28 07:43:01 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	clean_everything_process(t_data *data)
 	sem_close(data->dead_sem);
 	sem_close(data->meal_sem);
 	sem_close(data->dead_process);
+	sem_close(data->notify_process);
 }
 
 int	done_eating(t_data *data)

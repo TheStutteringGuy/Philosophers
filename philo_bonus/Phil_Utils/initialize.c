@@ -6,7 +6,7 @@
 /*   By: aibn-ich <aibn-ich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 06:41:25 by aibn-ich          #+#    #+#             */
-/*   Updated: 2024/06/27 02:00:36 by aibn-ich         ###   ########.fr       */
+/*   Updated: 2024/06/28 07:21:11 by aibn-ich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	initalize_notice(t_data *data)
 		printf("meals allocation failed \n");
 		return (0);
 	}
+	*data->meals = 0;
 	data->dead_notice = malloc(sizeof(long));
 	if (!data->dead_notice)
 	{
